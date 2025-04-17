@@ -145,10 +145,7 @@ export const HeroSection: React.FC = () => (
               sizes="(min-width: 1024px) 50vw, 100vw"
             />
             
-            {/* Enhanced Image Overlay Badge */}
-            <div className="absolute top-3 right-3 sm:top-6 sm:right-6 bg-white/90 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg shadow-md z-20" aria-label="In Köln seit 2010 tätig">
-              <p className="text-benfresh-teal font-semibold text-xs sm:text-sm">Seit 2010 in Köln</p>
-            </div>
+            {/* Image Overlay Badge removed as per client request */}
           </div>
           
           {/* Enhanced Decorative Elements with glow - hidden from screen readers */}

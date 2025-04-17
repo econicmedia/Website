@@ -109,47 +109,13 @@ export const checkFeatureSupport = () => {
 };
 
 /**
- * Shows a compatibility warning for outdated browsers
+ * Shows a compatibility warning for outdated browsers - disabled as per client request
  * @param {HTMLElement} targetElement - Element to show warning in
  * @param {Object} browserInfo - Browser information from detectBrowser()
  */
 export const showCompatibilityWarning = (targetElement, browserInfo) => {
-  // Check if there's already a compatibility warning
-  if (document.getElementById('browser-compatibility-warning')) {
-    return; // Don't show multiple warnings
-  }
-
-  if (!browserInfo.isCompatible && targetElement) {
-    const warningElement = document.createElement('div');
-    warningElement.id = 'browser-compatibility-warning';
-    warningElement.className = 'relative bg-yellow-400 text-black py-2 px-4 text-center text-sm z-10 border-b border-yellow-500';
-    warningElement.innerHTML = `
-      <div class="container mx-auto max-w-6xl flex flex-wrap items-center justify-between gap-2">
-        <p class="flex-1">Sie verwenden einen veralteten Browser (${browserInfo.name} ${browserInfo.version}), 
-        der möglicherweise nicht alle Funktionen dieser Website unterstützt. 
-        Wir empfehlen ein Update auf die neueste Version von 
-        <a href="https://www.google.com/chrome/" class="underline" target="_blank" rel="noopener">Chrome</a>, 
-        <a href="https://www.mozilla.org/firefox/" class="underline" target="_blank" rel="noopener">Firefox</a>, 
-        <a href="https://www.microsoft.com/edge" class="underline" target="_blank" rel="noopener">Edge</a> oder 
-        <a href="https://www.apple.com/safari/" class="underline" target="_blank" rel="noopener">Safari</a>.
-        </p>
-        <button class="bg-white text-black px-3 py-1 rounded hover:bg-gray-100 transition-colors text-sm font-medium flex-shrink-0" onclick="this.parentNode.parentNode.remove()">
-          Verstanden
-        </button>
-      </div>
-    `;
-    
-    // Insert at the top of the body, but not as a fixed element
-    const firstChild = targetElement.firstChild;
-    targetElement.insertBefore(warningElement, firstChild);
-    
-    // Store in session storage so it doesn't show again in this session
-    try {
-      sessionStorage.setItem('browser-warning-dismissed', 'false');
-    } catch (e) {
-      console.error('Error setting session storage', e);
-    }
-  }
+  // This function is intentionally disabled per client request
+  return;
 };
 
 /**
@@ -286,31 +252,7 @@ export const initBrowserCompatChecks = (rootElement) => {
   const browserInfo = detectBrowser();
   const features = checkFeatureSupport();
   
-  // Check if the warning has been dismissed before
-  let warningDismissed = false;
-  try {
-    warningDismissed = sessionStorage.getItem('browser-warning-dismissed') === 'true';
-  } catch (e) {
-    console.error('Error reading from session storage', e);
-  }
-  
-  // Only show warning if browser is incompatible and warning hasn't been dismissed
-  if (!warningDismissed) {
-    showCompatibilityWarning(rootElement, browserInfo);
-    
-    // Add event listener to handle dismissal
-    document.addEventListener('click', function handleDismissal(e) {
-      if (e.target.closest('#browser-compatibility-warning button')) {
-        try {
-          sessionStorage.setItem('browser-warning-dismissed', 'true');
-        } catch (e) {
-          console.error('Error setting session storage', e);
-        }
-        // Remove this event listener once warning is dismissed
-        document.removeEventListener('click', handleDismissal);
-      }
-    });
-  }
+  // Browser warning disabled per client request
   
   // Check WebP support asynchronously
   features.checkWebpSupport().then(() => {

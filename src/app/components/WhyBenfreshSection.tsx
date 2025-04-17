@@ -136,40 +136,77 @@ const WhyBenfreshSection: React.FC = () => (
             </div>
             <p className="text-lg text-[#555555] dark:text-benfresh-dark-text italic">Über 200 zufriedene Kunden vertrauen auf unsere Reinigungsdienstleistungen.</p>
           </div>
-          <div className="w-full md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4">
-            <blockquote className="group bg-[#F9F9F9] dark:bg-benfresh-dark-surface p-5 rounded-lg border-l-4 border-l-benfresh-teal dark:border-l-benfresh-dark-teal shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
-              {/* Quote icon with ambient effect */}
-              <div className="absolute -right-4 -top-4 text-benfresh-tealLight/30 dark:text-benfresh-dark-teal/20">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 transform rotate-180" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L9.758 4.03c0 0-.218.052-.597.144C8.97 4.222 8.737 4.278 8.472 4.345c-.271.05-.56.187-.882.312C7.272 4.799 6.904 4.895 6.562 5.123c-.344.218-.741.4-1.091.692C5.132 6.116 4.723 6.377 4.421 6.76c-.33.358-.656.734-.909 1.162C3.219 8.33 3.02 8.778 2.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C2.535 17.474 4.338 19 6.5 19c2.485 0 4.5-2.015 4.5-4.5S8.985 10 6.5 10zM17.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L20.758 4.03c0 0-.218.052-.597.144-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.143-.686.238-1.028.467-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.944-.33.358-.656.734-.909 1.162C14.219 8.33 14.02 8.778 13.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C13.535 17.474 15.338 19 17.5 19c2.485 0 4.5-2.015 4.5-4.5S19.985 10 17.5 10z" />
-                </svg>
-              </div>
+          <div className="w-full md:w-2/3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <blockquote className="group bg-[#F9F9F9] dark:bg-benfresh-dark-surface p-5 rounded-lg border-l-4 border-l-benfresh-teal dark:border-l-benfresh-dark-teal shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
+                {/* Quote icon with ambient effect */}
+                <div className="absolute -right-4 -top-4 text-benfresh-tealLight/30 dark:text-benfresh-dark-teal/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 transform rotate-180" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L9.758 4.03c0 0-.218.052-.597.144C8.97 4.222 8.737 4.278 8.472 4.345c-.271.05-.56.187-.882.312C7.272 4.799 6.904 4.895 6.562 5.123c-.344.218-.741.4-1.091.692C5.132 6.116 4.723 6.377 4.421 6.76c-.33.358-.656.734-.909 1.162C3.219 8.33 3.02 8.778 2.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C2.535 17.474 4.338 19 6.5 19c2.485 0 4.5-2.015 4.5-4.5S8.985 10 6.5 10zM17.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L20.758 4.03c0 0-.218.052-.597.144-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.143-.686.238-1.028.467-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.944-.33.358-.656.734-.909 1.162C14.219 8.33 14.02 8.778 13.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C13.535 17.474 15.338 19 17.5 19c2.485 0 4.5-2.015 4.5-4.5S19.985 10 17.5 10z" />
+                  </svg>
+                </div>
+                
+                <div className="relative z-10">
+                  <p className="text-[#555555] dark:text-benfresh-dark-text mb-4">&ldquo;BenFresh reinigt unsere Büros seit über 2 Jahren. Absolut zuverlässig und gründlich – wir sind sehr zufrieden!&rdquo;</p>
+                  <footer className="font-medium text-benfresh-grayDark dark:text-white flex items-center gap-2">
+                    <span className="inline-block w-6 h-0.5 bg-benfresh-teal dark:bg-benfresh-dark-teal"></span>
+                    Markus K., Köln-Ehrenfeld
+                  </footer>
+                </div>
+              </blockquote>
               
-              <div className="relative z-10">
-                <p className="text-[#555555] dark:text-benfresh-dark-text mb-4">&ldquo;BenFresh reinigt unsere Büros seit über 2 Jahren. Absolut zuverlässig und gründlich – wir sind sehr zufrieden!&rdquo;</p>
-                <footer className="font-medium text-benfresh-grayDark dark:text-white flex items-center gap-2">
-                  <span className="inline-block w-6 h-0.5 bg-benfresh-teal dark:bg-benfresh-dark-teal"></span>
-                  Markus K., Köln-Ehrenfeld
-                </footer>
-              </div>
-            </blockquote>
+              <blockquote className="group bg-[#F9F9F9] dark:bg-benfresh-dark-surface p-5 rounded-lg border-l-4 border-l-benfresh-teal dark:border-l-benfresh-dark-teal shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
+                {/* Quote icon with ambient effect */}
+                <div className="absolute -right-4 -top-4 text-benfresh-tealLight/30 dark:text-benfresh-dark-teal/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 transform rotate-180" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L9.758 4.03c0 0-.218.052-.597.144C8.97 4.222 8.737 4.278 8.472 4.345c-.271.05-.56.187-.882.312C7.272 4.799 6.904 4.895 6.562 5.123c-.344.218-.741.4-1.091.692C5.132 6.116 4.723 6.377 4.421 6.76c-.33.358-.656.734-.909 1.162C3.219 8.33 3.02 8.778 2.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C2.535 17.474 4.338 19 6.5 19c2.485 0 4.5-2.015 4.5-4.5S8.985 10 6.5 10zM17.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L20.758 4.03c0 0-.218.052-.597.144-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.143-.686.238-1.028.467-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.944-.33.358-.656.734-.909 1.162C14.219 8.33 14.02 8.778 13.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C13.535 17.474 15.338 19 17.5 19c2.485 0 4.5-2.015 4.5-4.5S19.985 10 17.5 10z" />
+                  </svg>
+                </div>
+                
+                <div className="relative z-10">
+                  <p className="text-[#555555] dark:text-benfresh-dark-text mb-4">&ldquo;Pünktlich, freundlich und die Räume strahlen nach der Reinigung. Kann BenFresh nur weiterempfehlen!&rdquo;</p>
+                  <footer className="font-medium text-benfresh-grayDark dark:text-white flex items-center gap-2">
+                    <span className="inline-block w-6 h-0.5 bg-benfresh-teal dark:bg-benfresh-dark-teal"></span>
+                    Sabine M., Köln-Sülz
+                  </footer>
+                </div>
+              </blockquote>
+            </div>
             
-            <blockquote className="group bg-[#F9F9F9] dark:bg-benfresh-dark-surface p-5 rounded-lg border-l-4 border-l-benfresh-teal dark:border-l-benfresh-dark-teal shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
-              {/* Quote icon with ambient effect */}
-              <div className="absolute -right-4 -top-4 text-benfresh-tealLight/30 dark:text-benfresh-dark-teal/20">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 transform rotate-180" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L9.758 4.03c0 0-.218.052-.597.144C8.97 4.222 8.737 4.278 8.472 4.345c-.271.05-.56.187-.882.312C7.272 4.799 6.904 4.895 6.562 5.123c-.344.218-.741.4-1.091.692C5.132 6.116 4.723 6.377 4.421 6.76c-.33.358-.656.734-.909 1.162C3.219 8.33 3.02 8.778 2.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C2.535 17.474 4.338 19 6.5 19c2.485 0 4.5-2.015 4.5-4.5S8.985 10 6.5 10zM17.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L20.758 4.03c0 0-.218.052-.597.144-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.143-.686.238-1.028.467-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.944-.33.358-.656.734-.909 1.162C14.219 8.33 14.02 8.778 13.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C13.535 17.474 15.338 19 17.5 19c2.485 0 4.5-2.015 4.5-4.5S19.985 10 17.5 10z" />
-                </svg>
-              </div>
+            {/* Additional reviews */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <blockquote className="group bg-[#F9F9F9] dark:bg-benfresh-dark-surface p-5 rounded-lg border-l-4 border-l-benfresh-teal dark:border-l-benfresh-dark-teal shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
+                <div className="absolute -right-4 -top-4 text-benfresh-tealLight/30 dark:text-benfresh-dark-teal/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 transform rotate-180" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L9.758 4.03c0 0-.218.052-.597.144C8.97 4.222 8.737 4.278 8.472 4.345c-.271.05-.56.187-.882.312C7.272 4.799 6.904 4.895 6.562 5.123c-.344.218-.741.4-1.091.692C5.132 6.116 4.723 6.377 4.421 6.76c-.33.358-.656.734-.909 1.162C3.219 8.33 3.02 8.778 2.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C2.535 17.474 4.338 19 6.5 19c2.485 0 4.5-2.015 4.5-4.5S8.985 10 6.5 10zM17.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L20.758 4.03c0 0-.218.052-.597.144-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.143-.686.238-1.028.467-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.944-.33.358-.656.734-.909 1.162C14.219 8.33 14.02 8.778 13.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C13.535 17.474 15.338 19 17.5 19c2.485 0 4.5-2.015 4.5-4.5S19.985 10 17.5 10z" />
+                  </svg>
+                </div>
+                
+                <div className="relative z-10">
+                  <p className="text-[#555555] dark:text-benfresh-dark-text mb-4">&ldquo;Wir beauftragen BenFresh regelmäßig für die Grundreinigung unserer Ferienwohnung. Die Qualität ist erstklassig und der Service immer zuverlässig.&rdquo;</p>
+                  <footer className="font-medium text-benfresh-grayDark dark:text-white flex items-center gap-2">
+                    <span className="inline-block w-6 h-0.5 bg-benfresh-teal dark:bg-benfresh-dark-teal"></span>
+                    Thomas B., Köln-Lindenthal
+                  </footer>
+                </div>
+              </blockquote>
               
-              <div className="relative z-10">
-                <p className="text-[#555555] dark:text-benfresh-dark-text mb-4">&ldquo;Pünktlich, freundlich und die Räume strahlen nach der Reinigung. Kann BenFresh nur weiterempfehlen!&rdquo;</p>
-                <footer className="font-medium text-benfresh-grayDark dark:text-white flex items-center gap-2">
-                  <span className="inline-block w-6 h-0.5 bg-benfresh-teal dark:bg-benfresh-dark-teal"></span>
-                  Sabine M., Köln-Sülz
-                </footer>
-              </div>
-            </blockquote>
+              <blockquote className="group bg-[#F9F9F9] dark:bg-benfresh-dark-surface p-5 rounded-lg border-l-4 border-l-benfresh-teal dark:border-l-benfresh-dark-teal shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
+                <div className="absolute -right-4 -top-4 text-benfresh-tealLight/30 dark:text-benfresh-dark-teal/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 transform rotate-180" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L9.758 4.03c0 0-.218.052-.597.144C8.97 4.222 8.737 4.278 8.472 4.345c-.271.05-.56.187-.882.312C7.272 4.799 6.904 4.895 6.562 5.123c-.344.218-.741.4-1.091.692C5.132 6.116 4.723 6.377 4.421 6.76c-.33.358-.656.734-.909 1.162C3.219 8.33 3.02 8.778 2.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C2.535 17.474 4.338 19 6.5 19c2.485 0 4.5-2.015 4.5-4.5S8.985 10 6.5 10zM17.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L20.758 4.03c0 0-.218.052-.597.144-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.143-.686.238-1.028.467-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.944-.33.358-.656.734-.909 1.162C14.219 8.33 14.02 8.778 13.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C13.535 17.474 15.338 19 17.5 19c2.485 0 4.5-2.015 4.5-4.5S19.985 10 17.5 10z" />
+                  </svg>
+                </div>
+                
+                <div className="relative z-10">
+                  <p className="text-[#555555] dark:text-benfresh-dark-text mb-4">&ldquo;Die Fensterreinigung war perfekt! Endlich wieder klare Sicht ohne Schlieren. Das Team war sehr freundlich und professionell. Gerne wieder!&rdquo;</p>
+                  <footer className="font-medium text-benfresh-grayDark dark:text-white flex items-center gap-2">
+                    <span className="inline-block w-6 h-0.5 bg-benfresh-teal dark:bg-benfresh-dark-teal"></span>
+                    Laura K., Köln-Deutz
+                  </footer>
+                </div>
+              </blockquote>
+            </div>
           </div>
         </div>
       </div>

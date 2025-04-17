@@ -329,7 +329,7 @@ const ContactSection: React.FC = () => {
                 Sie erreichen uns auch direkt per WhatsApp für eine schnelle und unkomplizierte Beratung oder Terminvereinbarung.
               </p>
               <a 
-                href="https://wa.me/491761115432?text=Hallo%20BenFresh,%20ich%20interessiere%20mich%20für%20Ihre%20Reinigungsdienste." 
+                href="https://wa.me/491791117165?text=Hallo%20BenFresh,%20ich%20interessiere%20mich%20für%20Ihre%20Reinigungsdienste." 
                 target="_blank" 
                 rel="noopener" 
                 className="group inline-flex items-center justify-center w-full bg-[#25D366] text-white rounded-lg px-5 py-3 font-semibold shadow hover:bg-[#128C7E] hover:shadow-lg transition-all relative overflow-hidden"
@@ -369,7 +369,7 @@ const ContactSection: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-sm text-[#555555] dark:text-benfresh-dark-textSecondary font-medium">Telefon</p>
-                    <a href="tel:+4917611154321" className="text-benfresh-grayDark dark:text-white hover:text-benfresh-teal dark:hover:text-benfresh-dark-teal transition-colors group-hover:text-benfresh-teal dark:group-hover:text-benfresh-dark-teal">+49 176 1115 4321</a>
+                    <a href="tel:+491791117165" className="text-benfresh-grayDark dark:text-white hover:text-benfresh-teal dark:hover:text-benfresh-dark-teal transition-colors group-hover:text-benfresh-teal dark:group-hover:text-benfresh-dark-teal">+49 179 1117 165</a>
                   </div>
                 </div>
                 
@@ -401,8 +401,8 @@ const ContactSection: React.FC = () => {
                   <div>
                     <p className="text-sm text-[#555555] dark:text-benfresh-dark-textSecondary font-medium">Adresse</p>
                     <address className="text-benfresh-grayDark dark:text-white not-italic group-hover:text-benfresh-teal dark:group-hover:text-benfresh-dark-teal transition-colors">
-                      Musterstraße 123<br />
-                      50667 Köln
+                      Montanusstrasse 28<br />
+                      51065 Köln
                     </address>
                   </div>
                 </div>

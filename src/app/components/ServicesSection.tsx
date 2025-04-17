@@ -108,15 +108,6 @@ const services = [
       </svg>
     ),
   },
-  {
-    title: "Tatortreinigung",
-    description: "Professionelle und diskrete Reinigung von besonderen Verschmutzungen. Spezialisiert auf die gründliche Beseitigung biologischer Spuren und komplexer Verschmutzungen.",
-    icon: (
-      <svg className="w-10 h-10 text-[#0097A7] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-      </svg>
-    ),
-  },
 ];
 
 const ServicesSection: React.FC = () => (
