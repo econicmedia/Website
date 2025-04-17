@@ -4,7 +4,7 @@ import OptimizedImage from "../../components/OptimizedImage";
 
 export const HeroSection: React.FC = () => (
   <section 
-    className="w-full bg-white dark:bg-benfresh-dark-bg py-16 lg:py-20 overflow-hidden relative" 
+    className="w-full bg-white dark:bg-benfresh-dark-bg py-8 sm:py-12 lg:py-20 overflow-hidden relative" 
     aria-labelledby="hero-heading"
   >
     {/* Background pattern with enhanced lighting */}
@@ -20,49 +20,49 @@ export const HeroSection: React.FC = () => (
     <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-radial from-benfresh-tealLight to-transparent opacity-50 rounded-full transform translate-x-1/3 -translate-y-1/4 dark:from-benfresh-dark-teal dark:opacity-20 blur-xl"></div>
     <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-gradient-radial from-benfresh-tealLight/30 to-transparent opacity-30 rounded-full dark:from-benfresh-dark-teal/20 blur-3xl"></div>
     
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
         {/* Left: Text Content */}
         <div className="w-full lg:w-1/2 flex flex-col relative z-10">
           {/* Logo - Exact Match to Screenshot */}
-          <div className="mb-12 self-start flex items-center gap-3" aria-hidden="true">
+          <div className="mb-6 sm:mb-12 self-start flex items-center gap-2 sm:gap-3" aria-hidden="true">
             <OptimizedImage 
               src="/images/logo.png" 
               alt="BenFresh Logo" 
               width={75} 
               height={75} 
-              className="w-[75px] h-[75px]" 
+              className="w-[50px] h-[50px] sm:w-[75px] sm:h-[75px]" 
               priority={true}
             />
-            <div className="h-8 w-px bg-benfresh-teal opacity-70 mx-1"></div>
-            <span className="text-3xl font-semibold text-benfresh-teal dark:text-benfresh-dark-teal tracking-wide">BenFresh Reinigung</span>
+            <div className="h-6 sm:h-8 w-px bg-benfresh-teal opacity-70 mx-1"></div>
+            <span className="text-xl sm:text-3xl font-semibold text-benfresh-teal dark:text-benfresh-dark-teal tracking-wide">BenFresh Reinigung</span>
           </div>
           
           {/* Main Heading - with higher z-index to appear on top of any background elements */}
           <div className="relative z-10">
             <h1 
               id="hero-heading" 
-              className="text-5xl sm:text-6xl lg:text-[4rem] font-extrabold text-benfresh-grayDark dark:text-white leading-tight mb-6 font-poppins tracking-tight"
+              className="text-3xl xs:text-4xl sm:text-5xl lg:text-[4rem] font-extrabold text-benfresh-grayDark dark:text-white leading-tight mb-4 sm:mb-6 font-poppins tracking-tight"
             >
               Professionelle <span className="text-benfresh-teal dark:text-benfresh-dark-teal">Reinigung</span><br className="hidden sm:block" /> mit Qualitätsgarantie
             </h1>
           </div>
           
           {/* Subheading */}
-          <p className="text-2xl font-semibold text-[#555555] dark:text-benfresh-dark-textSecondary mb-6">
+          <p className="text-lg sm:text-xl lg:text-2xl font-semibold text-[#555555] dark:text-benfresh-dark-textSecondary mb-4 sm:mb-6">
             Makellose Sauberkeit für Ihr Zuhause und Unternehmen in Köln & Umgebung
           </p>
           
           {/* Description */}
-          <p className="text-xl text-benfresh-grayDark dark:text-benfresh-dark-text mb-8 max-w-xl">
+          <p className="text-base sm:text-lg lg:text-xl text-benfresh-grayDark dark:text-benfresh-dark-text mb-6 sm:mb-8 max-w-xl">
             Vertrauen Sie auf unser erfahrenes Team für pünktliche, zuverlässige und gründliche Reinigungsdienstleistungen – mit 100% Zufriedenheitsgarantie.
           </p>
           
           {/* Enhanced CTAs with ambient effects */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-8">
+          <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
             <a 
               href="#leistungen" 
-              className="group inline-flex items-center justify-center bg-benfresh-teal text-white rounded-lg px-7 py-3.5 font-semibold shadow hover:bg-benfresh-tealDark hover:shadow-lg transition-all text-center relative overflow-hidden"
+              className="group inline-flex items-center justify-center bg-benfresh-teal text-white rounded-lg px-5 sm:px-7 py-3 sm:py-3.5 font-semibold text-sm sm:text-base shadow hover:bg-benfresh-tealDark hover:shadow-lg transition-all text-center relative overflow-hidden"
               aria-label="Zu unseren Leistungen springen"
             >
               {/* Button glow effect */}
@@ -77,7 +77,7 @@ export const HeroSection: React.FC = () => (
             </a>
             <a 
               href="#kontakt" 
-              className="group inline-flex items-center justify-center bg-white text-benfresh-teal border border-benfresh-teal rounded-lg px-7 py-3.5 font-semibold shadow hover:bg-[#f0fafa] hover:shadow-lg transition-all text-center relative overflow-hidden"
+              className="group inline-flex items-center justify-center bg-white text-benfresh-teal border border-benfresh-teal rounded-lg px-5 sm:px-7 py-3 sm:py-3.5 font-semibold text-sm sm:text-base shadow hover:bg-[#f0fafa] hover:shadow-lg transition-all text-center relative overflow-hidden"
               aria-label="Zum Kontaktformular springen"
             >
               {/* Button highlight effect */}
@@ -93,36 +93,36 @@ export const HeroSection: React.FC = () => (
           </div>
           
           {/* Enhanced Trust Indicators with hover effects */}
-          <div className="flex flex-wrap gap-8 items-center" aria-label="Vertrauensindikatoren">
+          <div className="flex flex-wrap gap-4 sm:gap-8 items-center" aria-label="Vertrauensindikatoren">
             <div className="flex items-center gap-3 group">
-              <div className="flex items-center justify-center bg-benfresh-tealLight rounded-full p-3 shadow-sm group-hover:shadow-md transition-all duration-300 relative overflow-hidden" aria-hidden="true">
+              <div className="flex items-center justify-center bg-benfresh-tealLight rounded-full p-2 sm:p-3 shadow-sm group-hover:shadow-md transition-all duration-300 relative overflow-hidden" aria-hidden="true">
                 {/* Inner glow effect */}
                 <div className="absolute inset-0 bg-gradient-radial from-white to-transparent opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-benfresh-teal relative z-10 transform group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-7 sm:w-7 text-benfresh-teal relative z-10 transform group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <span className="text-lg font-medium text-benfresh-grayDark dark:text-white group-hover:text-benfresh-teal dark:group-hover:text-benfresh-dark-teal transition-colors duration-300">DSGVO-konform</span>
+              <span className="text-sm sm:text-lg font-medium text-benfresh-grayDark dark:text-white group-hover:text-benfresh-teal dark:group-hover:text-benfresh-dark-teal transition-colors duration-300">DSGVO-konform</span>
             </div>
             <div className="flex items-center gap-3 group">
-              <div className="flex items-center justify-center bg-benfresh-tealLight rounded-full p-3 shadow-sm group-hover:shadow-md transition-all duration-300 relative overflow-hidden" aria-hidden="true">
+              <div className="flex items-center justify-center bg-benfresh-tealLight rounded-full p-2 sm:p-3 shadow-sm group-hover:shadow-md transition-all duration-300 relative overflow-hidden" aria-hidden="true">
                 {/* Inner glow effect */}
                 <div className="absolute inset-0 bg-gradient-radial from-white to-transparent opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-benfresh-teal relative z-10 transform group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-7 sm:w-7 text-benfresh-teal relative z-10 transform group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <span className="text-lg font-medium text-benfresh-grayDark dark:text-white group-hover:text-benfresh-teal dark:group-hover:text-benfresh-dark-teal transition-colors duration-300">Termingarantie</span>
+              <span className="text-sm sm:text-lg font-medium text-benfresh-grayDark dark:text-white group-hover:text-benfresh-teal dark:group-hover:text-benfresh-dark-teal transition-colors duration-300">Termingarantie</span>
             </div>
             <div className="flex items-center gap-3 group">
-              <div className="flex items-center justify-center bg-benfresh-tealLight rounded-full p-3 shadow-sm group-hover:shadow-md transition-all duration-300 relative overflow-hidden" aria-hidden="true">
+              <div className="flex items-center justify-center bg-benfresh-tealLight rounded-full p-2 sm:p-3 shadow-sm group-hover:shadow-md transition-all duration-300 relative overflow-hidden" aria-hidden="true">
                 {/* Inner glow effect */}
                 <div className="absolute inset-0 bg-gradient-radial from-white to-transparent opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-benfresh-teal relative z-10 transform group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-7 sm:w-7 text-benfresh-teal relative z-10 transform group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <span className="text-lg font-medium text-benfresh-grayDark dark:text-white group-hover:text-benfresh-teal dark:group-hover:text-benfresh-dark-teal transition-colors duration-300">Versichert & geprüft</span>
+              <span className="text-sm sm:text-lg font-medium text-benfresh-grayDark dark:text-white group-hover:text-benfresh-teal dark:group-hover:text-benfresh-dark-teal transition-colors duration-300">Versichert & geprüft</span>
             </div>
           </div>
         </div>
@@ -146,8 +146,8 @@ export const HeroSection: React.FC = () => (
             />
             
             {/* Enhanced Image Overlay Badge */}
-            <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md z-20" aria-label="In Köln seit 2010 tätig">
-              <p className="text-benfresh-teal font-semibold text-sm">Seit 2010 in Köln</p>
+            <div className="absolute top-3 right-3 sm:top-6 sm:right-6 bg-white/90 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg shadow-md z-20" aria-label="In Köln seit 2010 tätig">
+              <p className="text-benfresh-teal font-semibold text-xs sm:text-sm">Seit 2010 in Köln</p>
             </div>
           </div>
           
