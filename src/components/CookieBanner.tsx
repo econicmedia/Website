@@ -25,20 +25,27 @@ export default function CookieBanner() {
 
   // Load consent settings on mount
   useEffect(() => {
-    const storedConsent = localStorage.getItem('cookie-consent');
-    if (storedConsent) {
-      try {
-        const parsedConsent = JSON.parse(storedConsent);
-        setConsent(parsedConsent);
-        // Banner already seen and preferences saved
-        setShowBanner(false);
-      } catch {
-        // If parsing fails, show the banner
-        setShowBanner(true);
+    // Initialize banner to visible
+    setShowBanner(true);
+    
+    // Run this in try-catch to prevent issues with localStorage in SSR
+    try {
+      const storedConsent = localStorage.getItem('cookie-consent');
+      if (storedConsent) {
+        try {
+          const parsedConsent = JSON.parse(storedConsent);
+          setConsent(parsedConsent);
+          // Only hide the banner if consent was actually stored
+          if (parsedConsent.acceptedAt) {
+            setShowBanner(false);
+          }
+        } catch (e) {
+          console.error('Error parsing cookie consent', e);
+          // If parsing fails, keep the banner visible
+        }
       }
-    } else {
-      // No stored preferences, show the banner
-      setShowBanner(true);
+    } catch (e) {
+      console.error('Error accessing localStorage', e);
     }
   }, []);
 
