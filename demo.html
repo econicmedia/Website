@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BenFresh Ambient Lighting Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        benfresh: {
+                            white: "#FFFFFF",
+                            teal: "#0097A7",
+                            tealDark: "#007C8B",
+                            tealLight: "#E0F7FA",
+                            grayDark: "#2F2F2F",
+                            grayLight: "#F3F4F6",
+                        }
+                    },
+                    boxShadow: {
+                        'ambient-sm': '0 0 15px 0 rgba(0, 151, 167, 0.1)',
+                        'ambient-md': '0 0 25px 0 rgba(0, 151, 167, 0.15)',
+                        'ambient-lg': '0 0 40px 0 rgba(0, 151, 167, 0.2)',
+                        'card-hover': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05), 0 0 15px 0 rgba(0, 151, 167, 0.1)',
+                    },
+                    backgroundImage: {
+                        'ambient-glow': 'radial-gradient(circle, rgba(0,151,167,0.15) 0%, rgba(0,151,167,0) 70%)',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer components {
+            .service-card {
+                @apply bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition-all border border-[#F0F0F0] hover:-translate-y-1 duration-300 relative overflow-hidden;
+            }
+            
+            .ambient-light-effect {
+                @apply absolute -top-10 -right-10 w-40 h-40 bg-benfresh-tealLight/30 rounded-full blur-3xl opacity-0 group-hover:opacity-70 transition-opacity duration-500;
+            }
+            
+            .gradient-effect {
+                @apply absolute inset-0 bg-gradient-to-br from-benfresh-tealLight/20 to-transparent opacity-0 transition-opacity duration-300 hover:opacity-100;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-8 text-benfresh-grayDark">BenFresh Ambient Lighting Demo</h1>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
+            <!-- Card 1: Original -->
+            <div class="bg-white rounded-xl shadow-md p-6 border border-[#F0F0F0]">
+                <h3 class="text-xl font-bold mb-4 text-benfresh-grayDark">Original Card</h3>
+                <div class="flex items-center gap-3">
+                    <div class="bg-benfresh-tealLight rounded-full p-3">
+                        <svg class="w-6 h-6 text-benfresh-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-base text-gray-600">Basic card without ambient lighting effects</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 2: With Ambient Lighting -->
+            <div class="group bg-white rounded-xl shadow-md p-6 border border-[#F0F0F0] hover:shadow-xl transition-all duration-300 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-benfresh-tealLight/20 before:to-transparent before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100">
+                <!-- Ambient light effect -->
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-benfresh-tealLight/30 rounded-full blur-3xl opacity-0 group-hover:opacity-70 transition-opacity duration-500"></div>
+                
+                <div class="relative z-10">
+                    <h3 class="text-xl font-bold mb-4 text-benfresh-grayDark group-hover:text-benfresh-teal transition-colors duration-300">Enhanced Card</h3>
+                    <div class="flex items-start gap-3">
+                        <div class="bg-benfresh-tealLight rounded-full p-3 shadow-sm group-hover:shadow-md transition-all duration-300 relative overflow-hidden">
+                            <!-- Inner glow on hover -->
+                            <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-30 transition-opacity duration-300 rounded-full"></div>
+                            <svg class="w-6 h-6 text-benfresh-teal relative z-10 transform group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-base text-gray-600">Card with ambient lighting effects on hover</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Button Examples -->
+        <h2 class="text-2xl font-bold text-center mb-6 text-benfresh-grayDark">Button Enhancements</h2>
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+            <!-- Original Button -->
+            <button class="inline-flex items-center justify-center bg-benfresh-teal text-white rounded-lg px-7 py-3.5 font-semibold shadow">
+                Original Button
+            </button>
+            
+            <!-- Enhanced Button with Ambient Effect -->
+            <button class="group inline-flex items-center justify-center bg-benfresh-teal text-white rounded-lg px-7 py-3.5 font-semibold shadow hover:shadow-lg transition-all relative overflow-hidden">
+                <!-- Button glow effect -->
+                <div class="absolute inset-0 w-full h-full bg-white opacity-0 group-hover:opacity-20 group-hover:blur-md transition-all duration-300"></div>
+                <!-- Content on top of glow -->
+                <div class="relative z-10 flex items-center">
+                    <span>Enhanced Button</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </div>
+            </button>
+        </div>
+        
+        <!-- Section with Background Glow -->
+        <div class="relative p-8 rounded-xl bg-white shadow-md mb-8 overflow-hidden">
+            <!-- Background ambient glow -->
+            <div class="absolute -top-20 right-0 w-96 h-96 bg-gradient-to-br from-benfresh-tealLight/20 to-transparent rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-20 -left-20 w-96 h-96 bg-gradient-to-tr from-benfresh-tealLight/20 to-transparent rounded-full blur-3xl"></div>
+            
+            <div class="relative z-10">
+                <h2 class="text-2xl font-bold mb-4 text-benfresh-grayDark">Background Ambient Lighting</h2>
+                <p class="text-gray-600 mb-4">This section demonstrates how subtle ambient lighting in the background can enhance the visual appeal without distracting from the content.</p>
+                <p class="text-gray-600">The soft gradient glow creates a more professional and polished look that draws attention to important elements.</p>
+            </div>
+        </div>
+        
+        <!-- Feature Card Grid with Shadow Enhancements -->
+        <h2 class="text-2xl font-bold text-center mb-6 text-benfresh-grayDark">Feature Cards with Enhanced Shadows</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Card with shadow-ambient-sm -->
+            <div class="bg-white rounded-xl p-6 shadow-ambient-sm hover:shadow-ambient-md transition-all duration-300">
+                <h3 class="text-lg font-semibold mb-2 text-benfresh-grayDark">Light Ambient</h3>
+                <p class="text-gray-600">Card with light ambient shadow that subtly highlights the content</p>
+            </div>
+            
+            <!-- Card with shadow-ambient-md -->
+            <div class="bg-white rounded-xl p-6 shadow-ambient-md hover:shadow-ambient-lg transition-all duration-300">
+                <h3 class="text-lg font-semibold mb-2 text-benfresh-grayDark">Medium Ambient</h3>
+                <p class="text-gray-600">Card with medium ambient shadow for more visual prominence</p>
+            </div>
+            
+            <!-- Card with card-hover shadow -->
+            <div class="bg-white rounded-xl p-6 hover:shadow-card-hover transition-all duration-300 border border-[#F0F0F0] hover:-translate-y-1">
+                <h3 class="text-lg font-semibold mb-2 text-benfresh-grayDark">Full Enhancement</h3>
+                <p class="text-gray-600">Card with hover elevation, translation and ambient shadow</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
