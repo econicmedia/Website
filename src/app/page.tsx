@@ -83,7 +83,7 @@ export default function Home() {
       logBreakpoint();
       
       // Initialize browser compatibility checks
-      initBrowserCompatChecks(document.body);
+      initBrowserCompatChecks();
       
       // Show all content after hydration
       setTimeout(() => {

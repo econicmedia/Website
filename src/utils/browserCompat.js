@@ -110,10 +110,8 @@ export const checkFeatureSupport = () => {
 
 /**
  * Shows a compatibility warning for outdated browsers - disabled as per client request
- * @param {HTMLElement} targetElement - Element to show warning in
- * @param {Object} browserInfo - Browser information from detectBrowser()
  */
-export const showCompatibilityWarning = (targetElement, browserInfo) => {
+export const showCompatibilityWarning = () => {
   // This function is intentionally disabled per client request
   return;
 };
@@ -246,9 +244,8 @@ export const loadPolyfills = () => {
 
 /**
  * Initializes browser compatibility checks
- * @param {HTMLElement} rootElement - Root element to add warnings to (if needed)
  */
-export const initBrowserCompatChecks = (rootElement) => {
+export const initBrowserCompatChecks = () => {
   const browserInfo = detectBrowser();
   const features = checkFeatureSupport();
   
