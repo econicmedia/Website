@@ -1,53 +1,61 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, memo } from "react";
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import { initBrowserCompatChecks } from "../utils/browserCompat";
-import { logBreakpoint } from "../utils/responsiveTester";
 import HeroSection from "./components/HeroSection";
-import ServicesSection from "./components/ServicesSection";
-import WhyBenfreshSection from "./components/WhyBenfreshSection";
-import ContactSection from "./components/ContactSection";
-import FooterSection from "./components/FooterSection";
 
-// Back to Top Button component
-const BackToTopButton = () => {
-  // Always start with isVisible=false for SSR compatibility
+// Lazy load non-critical components to improve initial page load
+const ServicesSection = dynamic(() => import("./components/ServicesSection"), {
+  ssr: true,
+  loading: () => <div className="h-96" /> // Placeholder to prevent layout shift
+});
+
+const WhyBenfreshSection = dynamic(() => import("./components/WhyBenfreshSection"), {
+  ssr: true
+});
+
+const ContactSection = dynamic(() => import("./components/ContactSection"), {
+  ssr: true
+});
+
+const FooterSection = dynamic(() => import("./components/FooterSection"), {
+  ssr: true
+});
+
+// Memoized Back to Top Button to prevent unnecessary re-renders
+const BackToTopButton = memo(() => {
+  // Use useCallback for event handlers to prevent unnecessary re-renders
   const [isVisible, setIsVisible] = useState(false);
-  // Use this to prevent executing client-side code during server render
-  const [isMounted, setIsMounted] = useState(false);
+  
+  // Throttled scroll handler for better performance
+  const handleScroll = useCallback(() => {
+    // Only update state when visibility actually changes
+    const shouldBeVisible = window.scrollY > 600;
+    if (shouldBeVisible !== isVisible) {
+      setIsVisible(shouldBeVisible);
+    }
+  }, [isVisible]);
 
   useEffect(() => {
-    // Mark as mounted on client
-    setIsMounted(true);
-    
-    const scrollThreshold = 600;
-    
-    function toggleVisibility() {
-      setIsVisible(window.scrollY > scrollThreshold);
-    }
-    
-    // Add scroll event listener
-    window.addEventListener('scroll', toggleVisibility);
+    // Use passive listener to improve scrolling performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
     
     // Check initial visibility
-    toggleVisibility();
+    handleScroll();
     
-    // Clean up
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
+  
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }, []);
   
-  const scrollToTop = () => {
-    if (isMounted) {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
-  };
-  
-  // Always render the button, but control visibility with CSS
-  // This ensures server and client render the same HTML
+  // Only render and animate the button when needed
   return (
     <button
       className={`fixed bottom-6 left-6 p-3 bg-benfresh-teal text-white rounded-full shadow-lg transition-opacity duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-benfresh-teal ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
@@ -60,6 +68,7 @@ const BackToTopButton = () => {
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+        aria-hidden="true"
       >
         <path
           strokeLinecap="round"
@@ -70,53 +79,24 @@ const BackToTopButton = () => {
       </svg>
     </button>
   );
-};
+});
+
+BackToTopButton.displayName = 'BackToTopButton';
 
 export default function Home() {
-  // State to control section visibility
-  const [contentVisible, setContentVisible] = useState(false);
-
-  // Initialize browser compatibility checks and handle animations
+  // Initialize browser compatibility checks once without affecting rendering
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      // Log current device/screen size for debugging
-      logBreakpoint();
-      
-      // Initialize browser compatibility checks
-      initBrowserCompatChecks();
-      
-      // Show all content after hydration
+    // Use requestIdleCallback to run non-critical init during idle time
+    if ('requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(() => {
+        initBrowserCompatChecks();
+      }, { timeout: 1000 });
+    } else {
+      // Fallback for browsers that don't support requestIdleCallback
       setTimeout(() => {
-        setContentVisible(true);
-      }, 10);
-      
-      // Clean up function
-      return () => {};
+        initBrowserCompatChecks();
+      }, 200);
     }
-  }, []);
-
-  // Handle page visibility changes and navigation for content fix
-  useEffect(() => {
-    function handleVisibilityChange() {
-      if (document.visibilityState === 'visible') {
-        // When tab becomes visible again (like after navigation)
-        setContentVisible(true);
-      }
-    }
-
-    // Handle popstate events for browser back/forward navigation
-    function handlePopState() {
-      // Ensure content is visible when navigating with browser back button
-      setContentVisible(true);
-    }
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    window.addEventListener('popstate', handlePopState);
-
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('popstate', handlePopState);
-    };
   }, []);
 
   return (
@@ -126,55 +106,20 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       
-      {/* Main Content */}
+      {/* Main Content - Remove nested animation divs to improve performance */}
       <div className="flex flex-col min-h-screen">
-        {/* Hero Section */}
-        <div 
-          className={`transition-opacity duration-500 ${contentVisible ? 'opacity-100' : 'opacity-0'}`} 
-          style={{ transitionDelay: "0.1s" }}
-        >
-          <HeroSection />
-        </div>
+        {/* Critical path - load immediately */}
+        <HeroSection />
         
-        {/* Services Section */}
-        <div 
-          className={`transition-opacity duration-500 ${contentVisible ? 'opacity-100' : 'opacity-0'}`}
-          style={{ transitionDelay: "0.2s" }}
-        >
-          <ServicesSection />
-        </div>
-        
-        {/* Why BenFresh Section */}
-        <div 
-          className={`transition-opacity duration-500 ${contentVisible ? 'opacity-100' : 'opacity-0'}`}
-          style={{ transitionDelay: "0.3s" }}
-        >
-          <WhyBenfreshSection />
-        </div>
-        
-        {/* Contact Section */}
-        <div 
-          className={`transition-opacity duration-500 ${contentVisible ? 'opacity-100' : 'opacity-0'}`}
-          style={{ transitionDelay: "0.4s" }}
-        >
-          <ContactSection />
-        </div>
-        
-        {/* Footer */}
-        <div 
-          className={`transition-opacity duration-500 ${contentVisible ? 'opacity-100' : 'opacity-0'}`}
-          style={{ transitionDelay: "0.5s" }}
-        >
-          <FooterSection />
-        </div>
+        {/* Non-critical sections with lazy loading */}
+        <ServicesSection />
+        <WhyBenfreshSection />
+        <ContactSection />
+        <FooterSection />
       </div>
       
-      {/* WhatsApp Button temporarily disabled */}
-      
-      {/* Skip to top button - shows after scrolling */}
-      <div id="back-to-top-container">
-        <BackToTopButton />
-      </div>
+      {/* Back to top button - memoized to prevent unnecessary re-renders */}
+      <BackToTopButton />
     </>
   );
 }

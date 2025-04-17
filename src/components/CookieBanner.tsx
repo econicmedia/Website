@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 import Link from 'next/link';
 
 // Define cookie preference types
@@ -18,89 +18,141 @@ const defaultConsent: CookieConsent = {
   marketing: false,
 };
 
-export default function CookieBanner() {
-  const [consent, setConsent] = useState<CookieConsent>(defaultConsent);
-  const [showBanner, setShowBanner] = useState(false);
-  const [showPreferences, setShowPreferences] = useState(false);
+// Memoized cookie banner component for better performance
+export default memo(function CookieBanner() {
+  // Combine related state to reduce re-renders
+  const [state, setState] = useState({
+    consent: defaultConsent,
+    showBanner: false,
+    showPreferences: false,
+    isInitialized: false
+  });
+  
+  // Destructure for readability
+  const { consent, showBanner, showPreferences, isInitialized } = state;
 
-  // Load consent settings on mount
+  // Load consent settings asynchronously on mount
   useEffect(() => {
-    // Initialize banner to visible
-    setShowBanner(true);
-    
-    // Run this in try-catch to prevent issues with localStorage in SSR
-    try {
-      const storedConsent = localStorage.getItem('cookie-consent');
-      if (storedConsent) {
-        try {
-          const parsedConsent = JSON.parse(storedConsent);
-          setConsent(parsedConsent);
-          // Only hide the banner if consent was actually stored
-          if (parsedConsent.acceptedAt) {
-            setShowBanner(false);
+    // Use requestIdleCallback for non-critical operation
+    const loadConsent = () => {
+      try {
+        const storedConsent = localStorage.getItem('cookie-consent');
+        if (storedConsent) {
+          try {
+            const parsedConsent = JSON.parse(storedConsent);
+            
+            setState(prev => ({
+              ...prev,
+              consent: parsedConsent,
+              showBanner: !parsedConsent.acceptedAt,
+              isInitialized: true
+            }));
+          } catch (e) {
+            // If parsing fails, show the banner
+            setState(prev => ({
+              ...prev,
+              showBanner: true,
+              isInitialized: true
+            }));
           }
-        } catch (e) {
-          console.error('Error parsing cookie consent', e);
-          // If parsing fails, keep the banner visible
+        } else {
+          // No consent stored, show the banner
+          setState(prev => ({
+            ...prev,
+            showBanner: true,
+            isInitialized: true
+          }));
         }
+      } catch (e) {
+        // Error accessing localStorage, assume browser consent
+        setState(prev => ({
+          ...prev,
+          isInitialized: true
+        }));
       }
-    } catch (e) {
-      console.error('Error accessing localStorage', e);
+    };
+    
+    // Run initial state setup during idle time
+    if ('requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(loadConsent, { timeout: 1000 });
+    } else {
+      // Fallback for browsers without requestIdleCallback
+      setTimeout(loadConsent, 100);
     }
   }, []);
 
-  // Save consent to localStorage
-  const saveConsent = (newConsent: CookieConsent) => {
+  // Memoized handlers to prevent unnecessary re-renders
+  const saveConsent = useCallback((newConsent: CookieConsent) => {
     newConsent.acceptedAt = new Date().toISOString();
-    localStorage.setItem('cookie-consent', JSON.stringify(newConsent));
-    setConsent(newConsent);
-  };
+    
+    // Use try-catch to handle potential localStorage errors
+    try {
+      localStorage.setItem('cookie-consent', JSON.stringify(newConsent));
+    } catch (e) {
+      // Silent fail - user can still use site without consent storage
+    }
+    
+    // Use functional update to ensure we always have the latest state
+    setState(prev => ({
+      ...prev,
+      consent: newConsent,
+      showBanner: false,
+      showPreferences: false
+    }));
+    
+    // Dispatch storage event to notify other tabs about consent change
+    window.dispatchEvent(new Event('storage'));
+  }, []);
 
-  // Handle accepting all cookies
-  const acceptAll = () => {
-    const fullConsent = {
+  // Handle accepting all cookies - memoized
+  const acceptAll = useCallback(() => {
+    saveConsent({
       necessary: true,
       analytics: true,
       marketing: true,
-    };
-    saveConsent(fullConsent);
-    setShowBanner(false);
-    setShowPreferences(false);
-  };
+    });
+  }, [saveConsent]);
 
-  // Handle rejecting optional cookies
-  const rejectOptional = () => {
+  // Handle rejecting optional cookies - memoized
+  const rejectOptional = useCallback(() => {
     saveConsent({
       ...defaultConsent,
     });
-    setShowBanner(false);
-    setShowPreferences(false);
-  };
+  }, [saveConsent]);
 
-  // Handle saving custom preferences
-  const savePreferences = () => {
+  // Handle saving custom preferences - memoized
+  const savePreferences = useCallback(() => {
     saveConsent({
       ...consent,
     });
-    setShowBanner(false);
-    setShowPreferences(false);
-  };
+  }, [consent, saveConsent]);
 
-  // Toggle individual cookie types
-  const toggleCookieType = (type: 'analytics' | 'marketing') => {
-    setConsent(prev => ({
+  // Toggle individual cookie types - memoized
+  const toggleCookieType = useCallback((type: 'analytics' | 'marketing') => {
+    setState(prev => ({
       ...prev,
-      [type]: !prev[type],
+      consent: {
+        ...prev.consent,
+        [type]: !prev.consent[type],
+      }
     }));
-  };
+  }, []);
+  
+  // Open preferences panel - memoized
+  const openPreferences = useCallback(() => {
+    setState(prev => ({
+      ...prev,
+      showPreferences: true
+    }));
+  }, []);
 
-  // Return null if banner shouldn't be shown
-  if (!showBanner && !showPreferences) return null;
+  // Don't render anything until initialization is complete
+  if (!isInitialized || (!showBanner && !showPreferences)) return null;
 
+  // Optimized rendering with fewer conditionals
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50">
-      {/* Cookie Consent Banner */}
-      {showBanner && !showPreferences && (
+      {showBanner && !showPreferences ? (
         <div className="bg-white dark:bg-benfresh-dark-card shadow-lg border-t border-gray-200 dark:border-benfresh-dark-surface p-4 md:p-6">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -111,7 +163,7 @@ export default function CookieBanner() {
                 <p className="text-sm text-gray-600 dark:text-benfresh-dark-text mb-2">
                   Diese Website verwendet Cookies, um Ihre Erfahrung zu verbessern. Einige Cookies sind 
                   notwendig für den Betrieb der Website, während andere uns helfen, zu verstehen, wie Sie 
-                  mit der Website interagieren und Ihnen personalisierte Inhalte anzubieten.
+                  mit der Website interagieren.
                 </p>
                 <div className="text-sm text-gray-500 dark:text-benfresh-dark-textSecondary">
                   <span>
@@ -129,7 +181,7 @@ export default function CookieBanner() {
               </div>
               <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
                 <button
-                  onClick={() => setShowPreferences(true)}
+                  onClick={openPreferences}
                   className="text-sm px-4 py-2 rounded-lg border border-gray-300 dark:border-benfresh-dark-surface bg-white dark:bg-benfresh-dark-card text-benfresh-grayDark dark:text-white hover:bg-gray-50 dark:hover:bg-benfresh-dark-surface transition-colors"
                 >
                   Einstellungen
@@ -150,10 +202,7 @@ export default function CookieBanner() {
             </div>
           </div>
         </div>
-      )}
-
-      {/* Detailed Cookie Preferences */}
-      {showPreferences && (
+      ) : showPreferences ? (
         <div className="bg-white dark:bg-benfresh-dark-card shadow-lg border-t border-gray-200 dark:border-benfresh-dark-surface p-4 md:p-6">
           <div className="max-w-7xl mx-auto">
             <h3 className="text-xl font-semibold text-benfresh-grayDark dark:text-white mb-4">
@@ -211,7 +260,7 @@ export default function CookieBanner() {
                 </div>
                 <p className="text-sm text-gray-600 dark:text-benfresh-dark-text">
                   Diese Cookies helfen uns zu verstehen, wie Besucher mit unserer Website interagieren, 
-                  indem sie anonymisierte Nutzungsdaten und Informationen sammeln.
+                  indem sie anonymisierte Nutzungsdaten sammeln.
                 </p>
               </div>
               
@@ -271,7 +320,7 @@ export default function CookieBanner() {
             </div>
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   );
-}
+});
